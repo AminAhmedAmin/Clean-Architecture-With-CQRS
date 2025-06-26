@@ -1,0 +1,443 @@
+﻿@using VuexyBase.Application.Application.DTOs.Country
+
+@section VendorStyles {
+
+	<link rel="stylesheet" href="~/assets/vendor/libs/datatables-bs5/datatables.bootstrap5.dist.css">
+	<link rel="stylesheet" href="~/assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.dist.css">
+	<link rel="stylesheet" href="~/assets/vendor/libs/datatables-buttons-bs5/buttons.bootstrap5.dist.css">
+	<link rel="stylesheet" href="~/assets/vendor/libs/select2/select2.dist.css" />
+	<link rel="stylesheet" href="~/assets/vendor/libs/formvalidation/dist/css/formValidation.min.css" />
+
+	<style>
+		#deleteSelectedBtn {
+			transition: opacity 0.3s ease, transform 0.3s ease; /* Smooth transition */
+			opacity: 1; /* Fully visible by default */
+			transform: scale(1); /* Normal size */
+		}
+
+			#deleteSelectedBtn.hidden-animated {
+				opacity: 0; /* Fade out */
+				transform: scale(0.9); /* Slightly shrink */
+				pointer-events: none; /* Disable clicks when hidden */
+			}
+
+			/* Class to apply after animation completes */
+			#deleteSelectedBtn.hidden-animated-complete {
+				display: none; /* Removes from layout */
+			}
+
+		.btn.btn-filter {
+			background-color: transparent !important;
+			border: 2px solid green !important;
+			color: green; /* Optional: Ensures text isn’t gray from btn-secondary */
+			margin-right:5px !important;
+		}
+
+			.btn.btn-filter:hover {
+				background-color: green !important; /* Green background on hover */
+				color: white !important; /* White text on hover */
+			}
+		/* Style the responsive control column */
+		table.dataTable.dtr-column > tbody > tr > td.control,
+		table.dataTable.dtr-column > tbody > tr > th.control {
+			position: relative;
+			cursor: pointer;
+			text-align: center;
+			padding: 8px;
+		}
+
+			/* Ensure the "+" icon is visible */
+			table.dataTable.dtr-column > tbody > tr > td.control:before,
+			table.dataTable.dtr-column > tbody > tr > th.control:before {
+				content: '+';
+				font-size: 1.2em;
+				font-weight: bold;
+				color: #fff !important;
+				background-color: #007bff !important;
+				border-radius: 50%;
+				width: 20px;
+				height: 20px;
+				display: inline-block !important;
+				line-height: 20px;
+				text-align: center;
+				margin-right: 8px;
+				vertical-align: middle;
+				box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+			}
+
+			/* Style the row ID next to the "+" icon */
+			table.dataTable.dtr-column > tbody > tr > td.control .row-id,
+			table.dataTable.dtr-column > tbody > tr > th.control .row-id {
+				display: inline-block;
+				vertical-align: middle;
+				font-weight: normal;
+				color: #333;
+			}
+
+		/* Ensure the Delete Selected Rows button has margin */
+		#deleteSelectedBtn {
+			margin-right: 10px;
+			margin-left: 10px;
+		}
+
+			/* Ensure the button can be hidden reliably */
+			#deleteSelectedBtn.d-none {
+				display: none !important;
+			}
+
+		/* Fix for themes that might hide the icon */
+		table.dataTable.dtr-column > tbody > tr > td.control:before {
+			visibility: visible !important;
+			opacity: 1 !important;
+		}
+
+
+		/* Reduce padding in the checkbox column cells */
+		.dataTable td.dt-center,
+		.dataTable th.dt-center {
+			padding: 0 5px; /* Reduced padding */
+			text-align: center; /* Ensure centering */
+		}
+
+		/* Ensure the custom checkbox itself has no extra margins */
+		.custom-checkbox {
+			position: relative;
+			display: inline-block;
+			width: 16px;
+			height: 16px;
+			cursor: pointer;
+			margin: 0; /* Remove any default margins */
+		}
+
+			/* Rest of your existing checkbox CSS */
+			.custom-checkbox input[type="checkbox"] {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 16px;
+				height: 16px;
+				opacity: 0;
+				cursor: pointer;
+				z-index: 2;
+				margin: 0;
+			}
+
+			.custom-checkbox .checkbox-style {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 16px;
+				height: 16px;
+				background-color: #fff;
+				border: 2px solid #ccc;
+				border-radius: 4px;
+				transition: all 0.3s ease;
+				z-index: 1;
+			}
+
+			.custom-checkbox input[type="checkbox"]:checked + .checkbox-style {
+				background-color: #007bff;
+				border-color: #007bff;
+			}
+
+			.custom-checkbox .checkbox-style::after {
+				content: '';
+				position: absolute;
+				display: none;
+				left: 5px;
+				top: 2px;
+				width: 4px;
+				height: 8px;
+				border: solid white;
+				border-width: 0 2px 2px 0;
+				transform: rotate(45deg);
+			}
+
+			.custom-checkbox input[type="checkbox"]:checked + .checkbox-style::after {
+				display: block;
+			}
+
+			.custom-checkbox:hover .checkbox-style {
+				border-color: #999;
+			}
+
+		/* Ensure header alignment */
+		.dataTable thead th.dt-center .custom-checkbox {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 16px;
+			height: 16px;
+			margin: 0 auto;
+		}
+	</style>
+}
+
+@section VendorScripts {
+	<script src="~/assets/vendor/libs/moment/moment.dist.js"></script>
+	<script src="~/assets/vendor/libs/datatables-bs5/datatables-bootstrap5.dist.js"></script>
+	<script src="~/assets/vendor/libs/select2/select2.dist.js"></script>
+	<script src="~/assets/vendor/libs/formvalidation/dist/js/FormValidation.min.js"></script>
+	<script src="~/assets/vendor/libs/formvalidation/dist/js/plugins/Bootstrap5.min.js"></script>
+	<script src="~/assets/vendor/libs/formvalidation/dist/js/plugins/AutoFocus.min.js"></script>
+	<script src="~/assets/vendor/libs/cleavejs/cleave.dist.js"></script>
+	<script src="~/assets/vendor/libs/cleavejs/cleave-phone.dist.js"></script>
+}
+@section PageScripts {
+	<script src="~/assets/js/Countries.js"></script>
+	<script>
+				document.addEventListener('DOMContentLoaded', function () {
+			const uploadButton = document.getElementById('uploadImageBtn');
+			const fileInput = document.getElementById('CountryImage');
+			const imagePreview = document.getElementById('imagePreview');
+			const previewImg = document.getElementById('previewImg');
+			const removeImageBtn = document.getElementById('removeImageBtn');
+
+			// Trigger file input when upload button is clicked
+			uploadButton.addEventListener('click', function () {
+				fileInput.click();
+			});
+
+			// Show image preview when file is selected
+			fileInput.addEventListener('change', function (event) {
+				const file = event.target.files[0];
+				if (file) {
+					const reader = new FileReader();
+					reader.onload = function (e) {
+						previewImg.src = e.target.result;
+						imagePreview.style.display = 'block';
+					};
+					reader.readAsDataURL(file);
+				} else {
+					imagePreview.style.display = 'none';
+				}
+			});
+
+			// Remove image when remove button is clicked
+			removeImageBtn.addEventListener('click', function () {
+				fileInput.value = ''; // Clear the file input
+				imagePreview.style.display = 'none'; // Hide the preview
+				previewImg.src = '#'; // Reset the image source
+			});
+		});
+				function AddCountry() {
+			var formData = new FormData();
+
+			// Get form values
+			var NameAr = $('#CountryNameAR').val();
+			var NameEn = $('#CountryNameEN').val();
+			var Code = $('#CountryCode').val();
+
+			// Get the image file from the input
+			var imageFile = $('#CountryImage')[0].files[0]; // Access the first selected file
+
+			// Validation
+			if (!NameAr || !NameEn || !Code) {
+				toastr.error('Please fill all required fields');
+				return;
+			}
+
+			// Append form data
+			formData.append('NameAr', NameAr);
+			formData.append('NameEn', NameEn);
+			formData.append('Code', Code);
+			if (imageFile) {
+				formData.append('Image', imageFile); // Add the image file if it exists
+			}
+
+			$.ajax({
+				url: '/Countries/Add',
+				type: 'POST',
+				data: formData,
+				processData: false,  // Tell jQuery not to process the data
+				contentType: false,  // Tell jQuery not to set content type
+				success: function(response) {
+					// Check if the response indicates success
+					if (response.success) {
+						toastr.success('Country added successfully!');
+						// Redirect to /Countries after a short delay
+						setTimeout(function() {
+							window.location.href = '/Countries';
+						}, 1500);
+					} else {
+						toastr.error(response.message || 'Failed to add country');
+					}
+				},
+				error: function(xhr, status, error) {
+					// Handle error response
+					var errorMessage = xhr.responseJSON?.message || 'An error occurred while adding the country';
+					toastr.error(errorMessage);
+				}
+			});
+		}
+	</script>
+}
+
+
+@model IEnumerable<CountryDto>
+<div class="card">
+	<div class="card-datatable table-responsive">
+		<table class="datatables-users table border-top" id="CountriesTable">
+			<thead>
+				<tr>
+					<th></th>
+					<th></th>
+					<th>#</th>
+					<th>الاسم بالعربية</th>
+					<th>الاسم بالانجليزية</th>
+					<th>كود الدولة</th>
+					<th>الصورة</th>
+					<th>الحالة</th>
+					@* <th>تعديل</th> *@
+					<th>التحكم</th>
+				</tr>
+			</thead>
+
+		</table>
+	</div>
+
+	<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasFilter" aria-labelledby="offcanvasFilterLabel">
+		<div class="offcanvas-header">
+			<h5 id="offcanvasFilterLabel" class="offcanvas-title">Filter</h5>
+			<button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+		</div>
+		<div class="offcanvas-body mx-0 flex-grow-0 pt-0 h-100">
+			<form id="filterForm" class="p-3">
+				<!-- Creation Date Filter -->
+				<div class="mb-3">
+					<label for="creationDate" class="form-label">Creation Date</label>
+					<input type="date" class="form-control" id="creationDate" name="creationDate">
+				</div>
+
+				<!-- End Date Filter -->
+				<div class="mb-3">
+					<label for="endDate" class="form-label">End Date</label>
+					<input type="date" class="form-control" id="endDate" name="endDate">
+				</div>
+
+				<!-- Search String -->
+				<div class="mb-3">
+					<label for="searchString" class="form-label">Search</label>
+					<input type="text" class="form-control" id="searchString" name="searchString" placeholder="Enter search term">
+				</div>
+
+				<!-- Sort Direction -->
+				<div class="mb-3">
+					<label for="sortDirection" class="form-label">Sort Direction</label>
+					<select class="form-select" id="sortDirection" name="sortDirection">
+						<option value="asc">Ascending</option>
+						<option value="desc">Descending</option>
+					</select>
+				</div>
+
+				<!-- Property List for Sorting -->
+				<div class="mb-3">
+					<label for="sortProperty" class="form-label">Sort By</label>
+					<select class="form-select" id="sortProperty" name="sortProperty">
+						<option value="nameAr">Name (Arabic)</option>
+						<option value="nameEn">Name (English)</option>
+						<option value="code">Country Code</option>
+						<option value="isActive">Status</option>
+					</select>
+				</div>
+
+				<!-- Submit Button -->
+				<div class="d-flex justify-content-end">
+					<button type="submit" class="btn btn-primary">Apply Filters</button>
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasAddData" aria-labelledby="offcanvasAddDataLabel">
+		<div class="offcanvas-header">
+			<h5 id="offcanvasAddDataLabel" class="offcanvas-title">Add Country</h5>
+			<button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+		</div>
+		<div class="offcanvas-body mx-0 flex-grow-0 pt-0 h-100">
+			<form class="add-new-user pt-0" id="addNewUserForm" onsubmit="return false">
+				<div class="mb-3">
+					<label class="form-label" for="CountryNameAR">Name Ar</label>
+					<input type="text"
+						   class="form-control"
+						   id="CountryNameAR"
+						   placeholder="Country Name AR"
+						   name="CountryNameAR"
+						   aria-label="Country Name AR " />
+				</div>
+				<div class="mb-3">
+					<label class="form-label" for="CountryNameEN">Name En</label>
+					<input type="text"
+						   class="form-control"
+						   id="CountryNameEN"
+						   placeholder="Country Name EN"
+						   name="CountryNameEN"
+						   aria-label="Country Name EN" />
+				</div>
+				<div class="mb-3">
+					<label class="form-label" for="CountryCode">Country Code</label>
+					<input type="text"
+						   class="form-control"
+						   id="CountryCode"
+						   placeholder="EG"
+						   name="productSku"
+						   aria-label="" />
+				</div>
+				<div class="mb-3">
+					<input type="file"
+						   class="form-control d-none"
+						   id="CountryImage"
+						   name="CountryImage"
+						   accept="image/*" />
+					<button type="button" class="btn btn-primary w-100" id="uploadImageBtn">Upload Image</button>
+				</div>
+				<!-- Div to display the image preview -->
+				<div class="mb-3" id="imagePreview" style="display: none; position: relative;">
+					<img id="previewImg" src="#" alt="Uploaded Image" style="max-width: 100%; width: 100%; height: auto;" />
+					<button type="button" class="btn btn-danger btn-sm" id="removeImageBtn" style="position: absolute; top: 5px; right: 5px;">
+						<i class="ti ti-trash ti-sm"></i>
+					</button>
+				</div>
+				<button type="button" class="btn btn-primary" onclick="AddCountry()">Add Country</button>
+			</form>
+		</div>
+	</div>
+</div>
+
+
+<div class="modal fade" id="deleteConfirmModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="deleteModalLabel">Confirm Deletion</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				Are you sure you want to delete this country?
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+				<button type="button" class="btn btn-danger" id="confirmDeleteBtn">Delete</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Modal for confirming multiple deletions -->
+<div class="modal fade" id="deleteMultipleConfirmModal" tabindex="-1" aria-labelledby="deleteMultipleConfirmModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="deleteMultipleConfirmModalLabel">Confirm Deletion</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				Are you sure you want to delete <span id="deleteCount">0</span> selected row(s)?
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+				<button type="button" class="btn btn-danger" id="confirmDeleteMultipleBtn">Delete</button>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,154 @@
+﻿@using VuexyBase.Application.Application.DTOs.Country
+@model CountryDto
+
+<div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-3">
+    <div class="d-flex flex-column justify-content-center">
+        <h4 class="mb-1 mt-3">Add a new Country</h4>
+    </div>
+    <div class="d-flex align-content-center flex-wrap gap-3">
+        <div class="d-flex gap-3">
+            <a class="btn btn-label-secondary" href="/Countries/Index">Discard</a>
+        </div>
+        <button type="button" class="btn btn-primary" onclick="UpdateCountry()">Update Country</button>
+    </div>
+</div>
+@if (Model.Image != "/images/Country/")
+{
+    <div class="card mb-4">
+        <div class="card-header d-flex flex-column justify-content-center align-items-center">
+            <p class="fs-4 note needsclick pt-3 mb-3">Current Image</p>
+            <img src="/@Model.Image" class="mx-auto d-block" />
+        </div>
+    </div>
+
+}
+<div class="card mb-4">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h5 class="mb-0 card-title">Image</h5>
+    </div>
+    <div class="card-body">
+        <form action="" class="dropzone needsclick" id="dropzone-basic">
+            <div class="dz-message needsclick">
+                <p class="fs-4 note needsclick pt-3 mb-1">Drag and drop your New image here</p>
+                <p class="text-muted d-block fw-normal mb-2">or</p>
+                <span class="note needsclick btn bg-label-primary d-inline" id="btnBrowse">Browse image</span>
+            </div>
+            <div class="fallback">
+                <input name="file" type="file" id="imageFile" />
+            </div>
+        </form>
+    </div>
+</div>
+<div class="card mb-4">
+    <div class="card-header">
+        <h5 class="card-tile mb-0">Country information</h5>
+    </div>
+    <div class="card-body">
+        <div class="row mb-3">
+        <div class="col">
+                <label class="form-label" for="CountryNameAR">Name Ar</label>
+            <input type="text"
+                   class="form-control"
+                   id="CountryNameAR"
+                       placeholder="Country Name AR"
+                       name="CountryNameAR"
+                       aria-label="Country Name AR " value="@Model.NameAr" />
+        </div>
+            <div class="col">
+                <label class="form-label" for="CountryNameEN">Name En</label>
+                <input type="text"
+                       class="form-control"
+                       id="CountryNameEN"
+                       placeholder="Country Name EN"
+                       name="CountryNameEN"
+                       aria-label="Country Name EN" value="@Model.NameEn" />
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col">
+                <label class="form-label" for="CountryCode">Country Code</label>
+                <input type="text"
+                       class="form-control"
+                       id="CountryCode"
+                       placeholder="EG"
+                       name="productSku"
+                       aria-label="" value="@Model.Code" />
+            </div>
+
+        </div>
+
+    </div>
+</div>
+@section PageScripts
+{
+    <script src="../../assets/js/app-ecommerce-product-add.js"></script>
+    <script>
+          var myDropzone = new Dropzone("#dropzone-basic", {
+            url: "/dummy-upload",    // Required: Dummy URL (won't be used)
+            autoProcessQueue: false, // Prevent automatic upload
+            maxFiles: 1,            // Limit to one file
+            acceptedFiles: "image/*", // Accept only images
+            addRemoveLinks: true,   // Show remove links for uploaded files
+            init: function() {
+                this.on("addedfile", function(file) {
+                    console.log("File added: ", file);
+                    if (this.files.length > 1) {
+                        this.removeFile(this.files[0]);
+                    }
+                });
+                this.on("removedfile", function(file) {
+                    console.log("File removed: ", file);
+                });
+            }
+        });
+        function UpdateCountry()
+        {
+            var formData = new FormData();
+
+        // Get form values
+            var NameAr = $('#CountryNameAR').val();
+            var NameEn = $('#CountryNameEN').val();
+            var Code = $('#CountryCode').val();
+            debugger
+                var imageFile = myDropzone.files.length > 0 ? myDropzone.files[0] : null;
+
+                if (!NameAr || !NameEn || !Code) {
+                    toastr.error('Please fill all required fields');
+                    return;
+                }
+                formData.append('Id',@Model.Id)
+                formData.append('NameAr', NameAr);
+        formData.append('NameEn', NameEn);
+        formData.append('Code', Code);
+        if (imageFile) {
+            formData.append('Image', imageFile);
+        }
+
+        $.ajax({
+            url: '/Countries/Update',
+            type: 'POST',
+            data: formData,
+            processData: false,  // Tell jQuery not to process the data
+            contentType: false,  // Tell jQuery not to set content type
+            success: function(response) {
+                // Check if the response indicates success
+                if (response.success) {
+                    toastr.success('Country updated successfully!');
+                    // Redirect to /Countries after a short delay
+                    setTimeout(function() {
+                        window.location.href = '/Countries';
+                    }, 1500);
+                } else {
+                    toastr.error(response.message || 'Failed to Update country');
+                }
+            },
+            error: function(xhr, status, error) {
+                // Handle error response
+                var errorMessage = xhr.responseJSON?.message || 'An error occurred while updating the country';
+                toastr.error(errorMessage);
+            }
+        });
+        }
+    </script>
+    </script>
+}

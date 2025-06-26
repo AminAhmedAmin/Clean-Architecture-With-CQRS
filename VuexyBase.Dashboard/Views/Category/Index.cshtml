@@ -1,0 +1,104 @@
+﻿@using VuexyBase.Application.Application.ViewModels.Category
+@model ListCategoryViewModel
+@inject IStringLocalizer Localization
+
+@using Microsoft.AspNetCore.Identity
+@using System.Globalization
+@using Microsoft.AspNetCore.Localization
+
+@section VendorStyles {
+    <link rel="stylesheet" href="~/assets/vendor/libs/datatables-bs5/datatables.bootstrap5.dist.css">
+    <link rel="stylesheet" href="~/assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.dist.css">
+    <link rel="stylesheet" href="~/assets/vendor/libs/datatables-buttons-bs5/buttons.bootstrap5.dist.css">
+    <link rel="stylesheet" href="~/assets/vendor/libs/select2/select2.dist.css" />
+}
+
+@section VendorScripts {
+<script src="~/assets/vendor/libs/moment/moment.dist.js"></script>
+<script src="~/assets/vendor/libs/datatables-bs5/datatables-bootstrap5.dist.js"></script>
+<script src="~/assets/vendor/libs/select2/select2.dist.js"></script>
+<script src="~/assets/vendor/libs/formvalidation/dist/js/plugins/Bootstrap5.min.js"></script>
+<script src="~/assets/vendor/libs/formvalidation/di st/js/plugins/AutoFocus.min.js"></script>
+<script src="~/assets/vendor/libs/cleavejs/cleave.dist.js"></script>
+<script src="~/assets/vendor/libs/cleavejs/cleave-phone.dist.js"></script>
+}
+
+@{
+    string currentCulture = TempData["language"] as string;
+}
+
+<div id="main-page-body">
+
+
+    <p style="display:none">@Localization["AddNewCategory"]</p>
+    <!-- Layout wrapper -->
+    <div class="layout-wrapper layout-content-navbar">
+        <div class="layout-container">
+
+            <!-- Layout container -->
+            <!-- Content wrapper -->
+            <div class="content-wrapper" id="main-content">
+                @await Html.PartialAsync("_CategoryTablePartial", Model)
+            </div>
+
+            <div class="content-backdrop fade"></div>
+        </div>
+    </div>
+    <!-- Overlay -->
+    <div class="layout-overlay layout-menu-toggle"></div>
+
+    <!-- Drag Target Area To SlideIn Menu On Small Screens -->
+    <div class="drag-target"></div>
+
+<!-- Offcanvas to add new category -->
+<div class="offcanvas offcanvas-end"
+     tabindex="-1"
+     id="offcanvasAddData">
+    <div class="offcanvas-header">
+        <h5 id="offcanvasAddDataLabel" class="offcanvas-title offcanvasData">Add Category</h5>
+        <button type="button"
+                class="btn-close text-reset"
+                data-bs-dismiss="offcanvas"
+                aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body mx-0 flex-grow-0 pt-0 h-100" id="add-form">
+        @await Html.PartialAsync("_PartialAddCategory", new AddCategoryViewModel())
+    </div>
+</div>
+
+
+<!-- Offcanvas to add edit category -->
+<div class="offcanvas offcanvas-end"
+     tabindex="-2"
+     id="offcanvasEditData">
+    <div class="offcanvas-header">
+        <h5 id="offcanvasAddDataLabel" class="offcanvas-title ">Edit Category</h5>
+        <button type="button"
+                class="btn-close text-reset"
+                data-bs-dismiss="offcanvas"
+                aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body mx-0 flex-grow-0 pt-0 h-100">
+        @await Html.PartialAsync("_PartialEditCategory", new UpdateCategoryViewModel())
+    </div>
+</div>
+
+
+</div>
+
+
+<script>
+   
+    function handleSuccess(evt) {
+        const trigger = evt.detail.xhr.getResponseHeader("HX-Trigger");
+
+        if (trigger === "categoryUpdated") {
+            // Table needs to reload
+            htmx.ajax('GET', '@Url.Action("GetTablePartial", "Category")', '#table-container');
+
+            // Optionally close the offcanvas
+            const offcanvas = bootstrap.Offcanvas.getInstance(document.getElementById('offcanvasAddData'));
+            if (offcanvas) offcanvas.hide();
+        }
+    }
+</script>

@@ -1,0 +1,50 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Application\Common\Helpers\General\**" />
+    <Compile Remove="Application\Common\Helpers\IO\**" />
+    <Compile Remove="Application\Common\Helpers\Notifications\**" />
+    <Compile Remove="Application\Common\Helpers\Security\**" />
+    <Compile Remove="Mappers\**" />
+    <EmbeddedResource Remove="Application\Common\Helpers\General\**" />
+    <EmbeddedResource Remove="Application\Common\Helpers\IO\**" />
+    <EmbeddedResource Remove="Application\Common\Helpers\Notifications\**" />
+    <EmbeddedResource Remove="Application\Common\Helpers\Security\**" />
+    <EmbeddedResource Remove="Mappers\**" />
+    <None Remove="Application\Common\Helpers\General\**" />
+    <None Remove="Application\Common\Helpers\IO\**" />
+    <None Remove="Application\Common\Helpers\Notifications\**" />
+    <None Remove="Application\Common\Helpers\Security\**" />
+    <None Remove="Mappers\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Autofac" Version="8.3.0" />
+    <PackageReference Include="FirebaseAdmin" Version="3.1.0" />
+    <PackageReference Include="FluentValidation" Version="11.11.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Hosting.Abstractions" Version="2.3.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.12" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="9.0.1" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="9.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="9.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\VuexyBase.Domain\VuexyBase.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Application\Contracts\Application\Identities\" />
+    <Folder Include="Application\Services\Identities\" />
+    <Folder Include="Persistence\Migrations\" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,38 @@
+﻿@using VuexyBase.Application.Application.ViewModels.Category
+@model AddCategoryViewModel;
+<div id="form-create">
+  <form 
+          hx-post="@Url.Action("Create", "Category")"
+          hx-target="#form-create"
+           hx-swap="outerHTML"
+          hx-encoding="multipart/form-data"
+      hx-disabled-elt="find button"
+>
+
+    <div class="mb-3">
+        <label  class="form-label">Name (EN)</label>
+        <input asp-for="NameEn" class="form-control add-input" />
+        <span asp-validation-for="NameEn"></span>
+    </div>
+
+    <div class="mb-3">
+        <label  class="form-label">Name (AR)</label>
+        <input asp-for="NameAr" type="text" class="form-control add-input" />
+        <span asp-validation-for="NameAr"></span>
+
+    </div>
+
+    <div class="mb-3">
+        <label  class="form-label">Is Active</label>
+        <select  class="form-select" asp-for="IsActive">
+            <option value="true">Active</option>
+            <option value="false">Inactive</option>
+        </select>
+    </div>
+
+    <button id="submitbtn" type="submit"  class="btn btn-primary me-sm-3 me-1"> @Localization["submit"]</button>
+    
+    <button type="reset" class="btn btn-label-secondary" data-bs-dismiss="offcanvas"> @Localization["cancel"]</button>
+
+</form>
+</div>

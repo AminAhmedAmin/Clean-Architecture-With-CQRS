@@ -1,0 +1,133 @@
+﻿<!DOCTYPE html>
+
+<html lang="en"
+      class="light-style customizer-hide"
+      dir="rtl"
+      data-theme="theme-default"
+      data-assets-path="~/assets/"
+      data-template="vertical-menu-template">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+
+    <meta name="description" content="" />
+
+    <link rel="icon" type="image/x-icon" href="~/assets/img/favicon/favicon.ico" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&ampdisplay=swap"
+          rel="stylesheet" />
+
+    @* <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"> *@
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="~/assets/vendor/fonts/fontawesome.css" />
+    <link rel="stylesheet" href="~/assets/vendor/fonts/tabler-icons.css" />
+    <link rel="stylesheet" href="~/assets/vendor/fonts/flag-icons.css" />
+    <link href="~/assets/vendor/libs/animate-css/animate.dist.css" rel="stylesheet" />
+    <link href="~/assets/vendor/libs/animate-css/animate.css" rel="stylesheet" />
+    <!-- Core CSS -->
+    <link rel="stylesheet" href="~/assets/vendor/css/rtl/core.css" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="~/assets/vendor/css/rtl/theme-default.css" class="template-customizer-theme-css" />
+    <link rel="stylesheet" href="~/assets/css/demo.css" />
+
+    <!-- Vendors CSS -->
+    <link rel="stylesheet" href="~/assets/vendor/libs/node-waves/node-waves.css" />
+    <link href="~/assets/vendor/libs/toastr/toastr.dist.css" rel="stylesheet" />
+    <link href="~/assets/vendor/libs/toastr/toastr.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+    <link rel="stylesheet" href="~/assets/vendor/libs/typeahead-js/typeahead.css" />
+
+
+
+    <!-- Vendor -->
+    @*     <link rel="stylesheet" href="../../assets/vendor/libs/@@form-validation/umd/styles/index.min.css" />
+ *@
+
+    <!-- Page CSS -->
+    <!-- Page -->
+    <link rel="stylesheet" href="~/assets/vendor/css/pages/page-auth.css" />
+
+    <!-- Helpers -->
+    @* <script src="../../assets/vendor/js/helpers.js"></script> *@
+    <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
+    <!--? Template customizer: To hide customizer set displayCustomizer value false in config.js.  -->
+    <script src="~/assets/vendor/js/template-customizer.js"></script>
+    <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
+    <script src="~/assets/js/config.js"></script>
+    @await RenderSectionAsync("VendorStyles", required: false)
+
+    <!-- Page CSS -->
+    @await RenderSectionAsync("PageStyles", required: false)
+
+    <!-- Helpers -->
+    <script src="~/assets/vendor/js/helpers.js"></script>
+    <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
+    <!--? Template customizer: To hide customizer set displayCustomizer value false in config.js.  -->
+    <script src="~/assets/vendor/js/template-customizer.js"></script>
+    <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
+    <script src="~/assets/js/config.js"></script>
+</head>
+
+<body>
+    <!-- Content -->
+    @RenderBody()
+
+    @Html.Partial("_ToastPartial")
+
+    <!-- / Content -->
+    <!-- Core JS -->
+    <!-- build:js assets/vendor/js/core.js -->
+    <script src="~/main/script/Auth/login-logic.js"></script> <!--Your Custom Scripts-->
+    <!-- / Content -->
+    <!-- Core JS -->
+    <!-- build:js assets/vendor/js/core.js -->
+    <script src="~/assets/vendor/libs/jquery/jquery.dist.js"></script>
+    <script src="~/assets/vendor/libs/jquery/jquery.js"></script>
+    <script src="~/assets/vendor/libs/popper/popper.js"></script>
+    <script src="~/assets/vendor/js/bootstrap.js"></script>
+    <script src="~/assets/vendor/libs/node-waves/node-waves.js"></script>
+    <script src="~/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="~/assets/vendor/libs/hammer/hammer.js"></script>
+    <script src="~/assets/vendor/libs/i18n/i18n.js"></script>
+    <script src="~/assets/vendor/libs/typeahead-js/typeahead.js"></script>
+    <script src="~/assets/vendor/js/menu.js"></script>
+    <script src="~/assets/vendor/libs/toastr/toastr.dist.js"></script>
+    <script src="~/assets/vendor/libs/toastr/toastr.js"></script>
+    <script src="~/assets/js/ui-toasts.dist.js"></script>
+    <script src="~/assets/js/ui-toasts.js"></script>
+    <!-- endbuild -->
+    <!-- Main JS -->
+    <script src="~/assets/js/main.js"></script>
+
+    <!-- Page JS -->
+    <script src="~/assets/js/pages-auth.js"></script>
+
+    <!-- endbuild -->
+    <!-- Vendors JS -->
+    <script src="~/assets/vendor/libs/formvalidation/umd/bundle/popular.min.js"></script>
+    <script src="~/assets/vendor/libs/formvalidation/umd/plugin-bootstrap5/index.min.js"></script>
+    <script src="~/assets/vendor/libs/formvalidation/umd/plugin-auto-focus/index.min.js"></script>
+
+
+    <!-- / Content -->
+    <!-- Core JS -->
+    <!-- build:js assets/vendor/js/core.js -->
+
+    <!-- Main JS -->
+    <script src="~/assets/js/main.js"></script>
+
+    <!-- Page JS -->
+    <script src="~/assets/js/pages-auth.js"></script>
+    @await RenderSectionAsync("VendorScripts", required: false)
+
+    <!-- Main JS -->
+    <script src="~/assets/js/main.js"></script>
+
+    <!-- Page JS -->
+    @await RenderSectionAsync("PageScripts", required: false)
+</body>
+</html>

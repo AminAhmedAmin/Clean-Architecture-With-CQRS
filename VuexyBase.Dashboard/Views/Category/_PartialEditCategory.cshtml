@@ -1,0 +1,34 @@
+﻿@using VuexyBase.Application.Application.ViewModels.Category
+@model UpdateCategoryViewModel;
+
+<form asp-action="Edit"
+      hx-post="@Url.Action("Edit", "Category")"
+      hx-target="#table-container"
+      hx-swap="outerHTML"
+      hx-encoding="multipart/form-data"
+      hx-disabled-elt="find button"
+      method="post">
+
+        <input type="hidden" id="edit-id" name="Id" />
+
+        <div class="mb-3">
+            <labe for="edit-name-en" class="form-label">Name (EN)</label>
+            <input type="text" class="form-control" id="edit-name-en" asp-for="@Model.NameEn" />
+        </div>
+
+        <div class="mb-3">
+            <label for="edit-name-ar" class="form-label">Name (AR)</label>
+            <input type="text" class="form-control" id="edit-name-ar" name="NameAr" asp-for="@Model.NameAr" />
+        </div>
+
+        <div class="mb-3">
+            <label for="edit-is-active" class="form-label">Is Active</label>
+        <select id="edit-is-active" name="IsActive" class="form-select" asp-for="@Model.IsActive">
+                <option value="true">Active</option>
+                <option value="false">Inactive</option>
+            </select>
+        </div>
+
+    <button type="submit"  class="btn btn-primary">@Localization["save"]</button>
+
+</form>

@@ -1,0 +1,451 @@
+﻿[
+  {
+    "Key": "Required",
+    "LocalizedValue": {
+      "ar": "الحقل '{0}' مطلوب",
+      "en": "The field '{0}' is required"
+    }
+  },
+  {
+    "Key": "MinLength",
+    "LocalizedValue": {
+      "ar": "الحقل '{0}' يجب أن لا يقل عن '{1}' أحرف",
+      "en": "The field {0} must be a string or array type with a minimum length of '{1}'"
+    }
+  },
+  {
+    "Key": "MaxLength",
+    "LocalizedValue": {
+      "ar": "الحقل '{0}' يجب أن لا يزيد عن '{1}' أحرف",
+      "en": "The field {0} must be a string or array type with a maximum length of '{1}'"
+    }
+  },
+  {
+    "Key": "Email",
+    "LocalizedValue": {
+      "ar": "الحقل '{0}' ليس بريد الكترونى صحيح",
+      "en": "The field '{0}' is not a valid email address"
+    }
+  },
+  {
+    "Key": "GreaterThan",
+    "LocalizedValue": {
+      "ar": "الحقل '{0}' يجب أن يكون أكير من 0",
+      "en": "The field '{0}' must be greater than '0'"
+    }
+  },
+  {
+    "Key": "ExclusiveBetween",
+    "LocalizedValue": {
+      "ar": "الحقل '{0}' يجب أن يكون بين '{1}' و '{2}'",
+      "en": "The field '{0}' 'Postal Code' must be between '{1}' and '{2}'"
+    }
+  },
+  {
+    "Key": "SaudiPhone",
+    "LocalizedValue": {
+      "ar": "رقم الجوال غير صحيح",
+      "en": "Phone number is not valid"
+    }
+  },
+  {
+    "Key": "IdentityNumber",
+    "LocalizedValue": {
+      "ar": "رقم الهوية الوطنية غير صحيح",
+      "en": "Identity number is not valid"
+    }
+  },
+  {
+    "Key": "IBAN",
+    "LocalizedValue": {
+      "ar": "يرجي كتابة رقم الآي بان بصيغة صحيحة",
+      "en": "IBAN is not valid"
+    }
+  },
+  {
+    "Key": "BankAccountNo",
+    "LocalizedValue": {
+      "ar": "يرجي كتابة رقم حساب بنكي صحيح",
+      "en": "Bank account number is not valid"
+    }
+  },
+  {
+    "Key": "ConfirmNewPassowrd",
+    "LocalizedValue": {
+      "ar": "كلمتا المرور الجديدة غير متطابقة",
+      "en": "New passowrds don't match"
+    }
+  },
+  {
+    "Key": "Home",
+    "LocalizedValue": {
+      "ar": "الرئيسية",
+      "en": "Home"
+    }
+  },
+  {
+    "Key": "Email",
+    "LocalizedValue": {
+      "ar": "البريد الإلكتروني",
+      "en": "Email"
+    }
+  },
+  {
+    "Key": "Name",
+    "LocalizedValue": {
+      "ar": "الأسم",
+      "en": "Name"
+    }
+  },
+  {
+    "Key": "Sliders",
+    "LocalizedValue": {
+      "ar": "الشرائح",
+      "en": "Sliders"
+    }
+  },
+  {
+    "Key": "eCommerce",
+    "LocalizedValue": {
+      "ar": "التجارة الإلكترونية",
+      "en": "eCommerce"
+    }
+  },
+  {
+    "Key": "category",
+    "LocalizedValue": {
+      "ar": "الأقسام الرئيسية",
+      "en": "category"
+    }
+  },
+  {
+    "Key": "menuCategory",
+    "LocalizedValue": {
+      "ar": "الأقسام",
+      "en": "category"
+    }
+  },
+  {
+    "Key": "True",
+    "LocalizedValue": {
+      "ar": "مفعل",
+      "en": "true"
+    }
+  },
+  {
+    "Key": "False",
+    "LocalizedValue": {
+      "ar": "غير مفعل",
+      "en": "false"
+    }
+  },
+  {
+    "Key": "Status",
+    "LocalizedValue": {
+      "ar": "الحاله",
+      "en": "Status"
+    }
+  },
+  {
+    "Key": "submit",
+    "LocalizedValue": {
+      "ar": "ارسال",
+      "en": "submit"
+    }
+  },
+  {
+    "Key": "cancel",
+    "LocalizedValue": {
+      "ar": "الغاء",
+      "en": "cancel"
+    }
+  },
+  {
+    "Key": "CreationDate",
+    "LocalizedValue": {
+      "ar": "تاريخ الانشاء",
+      "en": "Creation Date"
+    }
+  },
+  {
+    "Key": "save",
+    "LocalizedValue": {
+      "ar": "حفظ",
+      "en": "save"
+    }
+  },
+  {
+    "Key": "Action",
+    "LocalizedValue": {
+      "ar": "الاجرائات",
+      "en": "Action"
+    }
+  },
+  {
+    "Key": "Delete",
+    "LocalizedValue": {
+      "ar": "حذف",
+      "en": "Delete"
+    }
+  },
+  {
+    "Key": "subcategory",
+    "LocalizedValue": {
+      "ar": "الأقسام الفرعية",
+      "en": "sub category"
+    }
+  },
+  {
+    "Key": "Products",
+    "LocalizedValue": {
+      "ar": "المنتجات",
+      "en": "Products"
+    }
+  },
+  {
+    "Key": "Product list",
+    "LocalizedValue": {
+      "ar": "قائمة المنتجات",
+      "en": "Product list"
+    }
+  },
+  {
+    "Key": "Add Product",
+    "LocalizedValue": {
+      "ar": "إضافة منتج",
+      "en": "Add Product"
+    }
+  },
+  {
+    "Key": "Category List",
+    "LocalizedValue": {
+      "ar": "قائمة التصنيفات",
+      "en": "Category List"
+    }
+  },
+  {
+    "Key": "Order",
+    "LocalizedValue": {
+      "ar": "الطلبات",
+      "en": "Order"
+    }
+  },
+  {
+    "Key": "AddNewCategory",
+    "LocalizedValue": {
+      "ar": "اضافه قسم جديد",
+      "en": "Add New Category"
+    }
+  },
+  {
+    "Key": "Order list",
+    "LocalizedValue": {
+      "ar": "قائمة الطلبات",
+      "en": "Order list"
+    }
+  },
+  {
+    "Key": "Order Details",
+    "LocalizedValue": {
+      "ar": "تفاصيل الطلب",
+      "en": "Order Details"
+    }
+  },
+  {
+    "Key": "Customer",
+    "LocalizedValue": {
+      "ar": "العميل",
+      "en": "Customer"
+    }
+  },
+  {
+    "Key": "All Customers",
+    "LocalizedValue": {
+      "ar": "جميع العملاء",
+      "en": "All Customers"
+    }
+  },
+  {
+    "Key": "Customer Details",
+    "LocalizedValue": {
+      "ar": "تفاصيل العميل",
+      "en": "Customer Details"
+    }
+  },
+  {
+    "Key": "Security",
+    "LocalizedValue": {
+      "ar": "الأمان",
+      "en": "Security"
+    }
+  },
+  {
+    "Key": "Address & Billing",
+    "LocalizedValue": {
+      "ar": "العنوان والفوترة",
+      "en": "Address & Billing"
+    }
+  },
+  {
+    "Key": "Notifications",
+    "LocalizedValue": {
+      "ar": "الإشعارات",
+      "en": "Notifications"
+    }
+  },
+  {
+    "Key": "Referrals",
+    "LocalizedValue": {
+      "ar": "الإحالات",
+      "en": "Referrals"
+    }
+  },
+  {
+    "Key": "Settings",
+    "LocalizedValue": {
+      "ar": "الإعدادات",
+      "en": "Settings"
+    }
+  },
+  {
+    "Key": "Academy",
+    "LocalizedValue": {
+      "ar": "الأكاديمية",
+      "en": "Academy"
+    }
+  },
+  {
+    "Key": "Overview",
+    "LocalizedValue": {
+      "ar": "نظرة عامة",
+      "en": "Overview"
+    }
+  },
+  {
+    "Key": "My Course",
+    "LocalizedValue": {
+      "ar": "كورساتي",
+      "en": "My Course"
+    }
+  },
+  {
+    "Key": "Course Details",
+    "LocalizedValue": {
+      "ar": "تفاصيل الدورة",
+      "en": "Course Details"
+    }
+  },
+  {
+    "Key": "Logistics",
+    "LocalizedValue": {
+      "ar": "الخدمات اللوجستية",
+      "en": "Logistics"
+    }
+  },
+  {
+    "Key": "Fleet",
+    "LocalizedValue": {
+      "ar": "الأسطول",
+      "en": "Fleet"
+    }
+  },
+  {
+    "Key": "Invoice",
+    "LocalizedValue": {
+      "ar": "الفاتورة",
+      "en": "Invoice"
+    }
+  },
+  {
+    "Key": "List",
+    "LocalizedValue": {
+      "ar": "القائمة",
+      "en": "List"
+    }
+  },
+  {
+    "Key": "Preview",
+    "LocalizedValue": {
+      "ar": "معاينة",
+      "en": "Preview"
+    }
+  },
+  {
+    "Key": "Edit",
+    "LocalizedValue": {
+      "ar": "تعديل",
+      "en": "Edit"
+    }
+  },
+  {
+    "Key": "Add",
+    "LocalizedValue": {
+      "ar": "إضافة",
+      "en": "Add"
+    }
+  },
+  {
+    "Key": "Users",
+    "LocalizedValue": {
+      "ar": "المستخدمين",
+      "en": "Users"
+    }
+  },
+  {
+    "Key": "View",
+    "LocalizedValue": {
+      "ar": "عرض",
+      "en": "View"
+    }
+  },
+  {
+    "Key": "Profile",
+    "LocalizedValue": {
+      "ar": "الملف الشخصي",
+      "en": "Profile"
+    }
+  },
+  {
+    "Key": "Connections",
+    "LocalizedValue": {
+      "ar": "الاتصالات",
+      "en": "Connections"
+    }
+  },
+  {
+    "Key": "Roles & Permissions",
+    "LocalizedValue": {
+      "ar": "الأدوار والصلاحيات",
+      "en": "Roles & Permissions"
+    }
+  },
+  {
+    "Key": "Roles",
+    "LocalizedValue": {
+      "ar": "الأدوار",
+      "en": "Roles"
+    }
+  },
+  {
+    "Key": "Permission",
+    "LocalizedValue": {
+      "ar": "الصلاحية",
+      "en": "Permission"
+    }
+  },
+  {
+    "Key": "Dashboard",
+    "LocalizedValue": {
+      "ar": "لوحة التحكم",
+      "en": "Dashboard"
+    }
+  },
+  {
+    "Key": "Logout",
+    "LocalizedValue": {
+      "ar": "تسجيل الخروج",
+      "en": "Log Out"
+    }
+  }
+
+]

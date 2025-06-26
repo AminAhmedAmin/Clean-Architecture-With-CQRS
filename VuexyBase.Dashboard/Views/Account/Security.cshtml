@@ -1,0 +1,101 @@
+﻿@using VuexyBase.Application.Application.ViewModels.Profile
+@model ChangePasswordViewModel
+
+@section VendorStyles {
+    <link rel="stylesheet" href="~/vendor/libs/select2/select2.dist.css" />
+    <link rel="stylesheet" href="~/vendor/libs/formvalidation/dist/css/formValidation.min.css" />
+}
+
+@section VendorScripts {
+    <script src="~/vendor/libs/select2/select2.dist.js"></script>
+    <script src="~/vendor/libs/formvalidation/dist/js/FormValidation.min.js"></script>
+    <script src="~/vendor/libs/formvalidation/dist/js/plugins/Bootstrap5.min.js"></script>
+    <script src="~/vendor/libs/formvalidation/dist/js/plugins/AutoFocus.min.js"></script>
+    <script src="~/vendor/libs/cleavejs/cleave.dist.js"></script>
+    <script src="~/vendor/libs/cleavejs/cleave-phone.dist.js"></script>
+}
+
+@section PageStyles {
+    <link rel="stylesheet" href="~/vendor/css/pages/page-account-settings.dist.css" />
+}
+
+@section PageScripts {
+    <script src="~/js/pages-account-settings-security.dist.js"></script>
+    <script src="~/js/modal-enable-otp.dist.js"></script>
+    <script src="~/main/script/Account/security.js"></script>
+    <script src="~/main/script/Account/security-logic.js"></script>
+
+}
+
+<h4 class="fw-bold py-3 mb-4">
+    <span class="text-muted fw-light">Account Settings /</span> Security
+</h4>
+
+<div class="row">
+    <div class="col-md-12">
+
+        <ul class="nav nav-pills flex-column flex-md-row mb-4">
+            <li class="nav-item">
+                <a class="nav-link" asp-controller="Account" asp-action="Index">
+                    <i class="ti-xs ti ti-users me-1"></i>
+                    Account
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="javascript:void(0);">
+                    <i class="ti-xs ti ti-lock me-1"> </i>
+                    Security
+                </a>
+            </li>
+        </ul>
+
+        <div class="card mb-4">
+            <h5 class="card-header">Change Password</h5>
+            <div class="card-body">
+                <form id="formAccountSettings" asp-action="ChangePassowrd" asp-controller="Account" method="post">
+                    <div class="row">
+                        <div class="mb-3 col-md-6 form-password-toggle">
+                            <label class="form-label" for="currentPassword">Current Password</label>
+                            <div class="input-group input-group-merge">
+                                <input class="form-control" type="password" name="CurrentPassword" id="currentPassword" placeholder="••••••••" />
+                                <span class="input-group-text cursor-pointer"><i class="ti ti-eye-off"></i></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="mb-3 col-md-6 form-password-toggle">
+                            <label class="form-label" for="newPassword">New Password</label>
+                            <div class="input-group input-group-merge">
+                                <input class="form-control" type="password" name="NewPassword" id="newPassword" placeholder="••••••••" />
+                                <span class="input-group-text cursor-pointer"><i class="ti ti-eye-off"></i></span>
+                            </div>
+                        </div>
+
+                        <div class="mb-3 col-md-6 form-password-toggle">
+                            <label class="form-label" for="confirmPassword">Confirm New Password</label>
+                            <div class="input-group input-group-merge">
+                                <input class="form-control" type="password" name="ConfirmPassword" id="confirmPassword" placeholder="••••••••" />
+                                <span class="input-group-text cursor-pointer"><i class="ti ti-eye-off"></i></span>
+                            </div>
+                        </div>
+
+                        <div class="col-12 mb-4">
+                            <h6>Password Requirements:</h6>
+                            <ul class="ps-3 mb-0">
+                                <li class="mb-1">Minimum 6 characters long</li>
+                                <li class="mb-1">At least one lowercase letter</li>
+                                <li>At least one number or whitespace character</li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <button type="submit" class="btn btn-primary me-2">Save changes</button>
+                            <button type="reset" class="btn btn-label-secondary">Cancel</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

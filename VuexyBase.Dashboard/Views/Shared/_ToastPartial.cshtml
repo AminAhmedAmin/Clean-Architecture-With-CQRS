@@ -1,0 +1,46 @@
+﻿<div id="customToast"
+     class="toast position-fixed top-0 end-0 mt-3 shadow-lg animate__animated"
+     role="alert"
+     aria-live="assertive"
+     aria-atomic="true"
+     data-bs-delay="3000">
+    <div class="toast-header">
+        <i class="ti ti-bell me-2"></i>
+        <strong class="me-auto">Message</strong>
+        <small class="">Just now</small>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body fw-semibold" id="toastBody">
+        @TempData["ToastMessage"]
+    </div>
+</div>
+
+<script src="~/assets/vendor/libs/jquery/jquery.dist.js"></script>
+<script src="~/assets/vendor/libs/jquery/jquery.js"></script>
+
+<script>
+
+    $(document).ready(function ()
+    {
+        debugger;
+
+        const toastType = '@TempData["ToastType"]';
+        const toastMessage = '@TempData["ToastMessage"]';
+
+        if (toastType && toastMessage.trim() !== "")
+        {
+            debugger;
+
+            const toastEl = $("#customToast");
+            const bgClass = toastType === "success" ? "bg-success" : "bg-danger";
+
+            toastEl.addClass(bgClass + " text-white animate__lightSpeedInRight");
+            toastEl.find(".toast-header").addClass(bgClass + " text-white");
+            toastEl.find("strong").text(toastType === "success" ? "Success" : "Error");
+
+            void toastEl[0].offsetWidth;
+            new bootstrap.Toast(toastEl[0]).show();
+        }
+    });
+
+</script>

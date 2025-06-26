@@ -1,0 +1,23 @@
+﻿@using VuexyBase.Application.Application.ViewModels.Dashboard
+@model List<DashboardStat>
+
+<div class="container-xxl flex-grow-1 container-p-y">
+    <div class="row g-4 mb-4" id="card-container">
+        @foreach (var stat in Model)
+        {
+            <div class="col-sm-6 col-xl-3">
+                <div class="card">
+                    <div class="card-body d-flex align-items-center">
+                        <div class="content-left">
+                            <span class="badge @stat.BadgeColor rounded p-2">
+                                <i class="@stat.Icon ti-md"></i>
+                            </span>
+                            <span class="d-block mt-2">@Localization[stat.Label]</span>
+                            <h3 class="mb-0 mt-2">@stat.Value</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

@@ -1,0 +1,117 @@
+﻿@using VuexyBase.Application.Application.ViewModels.Category
+@using VuexyBase.Application.Application.ViewModels.Dashboard
+@model ListCategoryViewModel
+@inject IStringLocalizer Localization
+@{
+  string currentCulture = TempData["language"] as string;
+}
+<div id="table-container">
+
+
+    @{
+       List <DashboardStat> stats = new List<DashboardStat>
+     {
+     new DashboardStat { Icon = "ti ti-user", BadgeColor = "bg-label-secondary", Label = "Categories Number", Value = Model.CategoryNumber },
+     new DashboardStat { Icon = "ti ti-user-plus", BadgeColor = "bg-label-success", Label = "Active Categories", Value = Model.ActiveNumber },
+     new DashboardStat { Icon = "ti ti-user-check", BadgeColor = "bg-label-danger", Label = "Disabled Categories", Value = Model.DisabledNumber }
+     };
+     }
+ 
+     @await Html.PartialAsync("_Dashboardstats", stats)
+
+ 
+
+
+    <!-- DataTable Controls (search + export + length) -->
+    <div class="row me-2 align-items-center mb-3">
+        <div class="col-md-2">
+            <div id="datatable-length-placeholder"></div>
+        </div>
+        <div class="col-md-10 text-end d-flex flex-wrap justify-content-md-end justify-content-start gap-2">
+            <div class="dataTables_filter d-flex align-items-center">
+                @await Html.PartialAsync("_DataTableStatusFilter")
+            </div>
+            <div id="datatable-buttons-placeholder" class="dt-action-buttons"></div>
+        </div>
+    </div>
+
+    <!-- Table -->
+    <div class="card" id="table-data-filter">
+        <div class="card-datatable table-responsive pt-0">
+            <table class="datatables-table table">
+                <thead class="border-top">
+                    <tr>
+                        <th>@Localization["Name"]</th>
+                        <th>@Localization["Status"]</th>
+                        <th>@Localization["CreationDate"]</th>
+                        <th>@Localization["Action"]</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var category in Model.Categories)
+                    {
+                        <tr>
+                            <td>@((currentCulture == "en") ? category.NameEn : category.NameAr)</td>
+                            @{
+                                string badge = category.IsActive ? "badge bg-label-success" : "badge bg-label-danger";
+                            }
+                            <td>
+                                <span id="status-@category.Id"
+                                      class="@badge"
+                                      style="padding:10px 15px!important;cursor:pointer"
+                                      hx-post="@Url.Action("Status", new { id = category.Id })"
+                                      hx-target="#table-container"
+                                      hx-swap="outerHTML">
+                                    @Localization[category.IsActive.ToString()]
+                                </span>
+                            </td>
+                            <td>@category.CreationDate.ToString("yyyy-MM-dd")</td>
+                            <td>
+                                <button class="btn btn-warning edit-category-btn"
+                                        data-bs-toggle="offcanvas"
+                                        data-bs-target="#offcanvasEditData"
+                                        data-id="@category.Id"
+                                        data-name-en="@category.NameEn"
+                                        data-name-ar="@category.NameAr"
+                                        data-is-active="@category.IsActive">
+                                    @Localization["Edit"]
+                                </button>
+                                <button class="btn btn-danger"
+                                        hx-delete="@Url.Action("Delete", new { id = category.Id })"
+                                        hx-target="#table-container" 
+                                         x-swap="outerHTML" >
+                                    @Localization["Delete"]
+                                </button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Info + Pagination -->
+        <div class="row mx-2 mt-2">
+            <div class="col-sm-12 col-md-6">
+                <div id="datatable-info-placeholder"></div>
+            </div>
+            <div class="col-sm-12 col-md-6 text-end">
+                <div id="datatable-pagination-placeholder"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<Script>
+        document.querySelectorAll('.edit-category-btn').forEach(button => {
+        button.addEventListener('click', function () {
+            const id = this.getAttribute('data-id');
+            const nameEn = this.getAttribute('data-name-en');
+            const nameAr = this.getAttribute('data-name-ar');
+            const isActive = this.getAttribute('data-is-active');
+            document.getElementById('edit-id').value = id;
+            document.getElementById('edit-name-en').value = nameEn;
+            document.getElementById('edit-name-ar').value = nameAr;
+            document.getElementById('edit-is-active').value = isActive.toLowerCase();
+        });
+    });
+</Script>

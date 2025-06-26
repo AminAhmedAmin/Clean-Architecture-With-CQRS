@@ -1,0 +1,40 @@
+﻿@inject IStringLocalizer Localization
+
+<div class="row g-3 mb-3 align-items-center">
+    <!-- Length Dropdown -->
+    <div class="col-auto">
+        <select name="datatable_length" class="form-select form-select-sm">
+            <option value="10">10</option>
+            <option value="25">25</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+        </select>
+    </div>
+
+    <!-- Search Box -->
+    <div class="col">
+        <input id="datatable-search" type="search" class="form-control form-control-sm" placeholder="@Localization["Search"]..." />
+    </div>
+
+    <!-- Status Filter -->
+    <div class="col-auto">
+        <select id="status-filter" class="form-select form-select-sm">
+            <option value="">@Localization["All"]</option>
+            <option value="True">@Localization["Active"]</option>
+            <option value="False">@Localization["Disabled"]</option>
+        </select>
+    </div>
+
+    <!-- Export Buttons -->
+    <div class="col-auto" id="datatable-buttons-placeholder"></div>
+
+    <!-- Add Button -->
+    <div class="col-auto">
+        <button type="button"
+                class="btn btn-sm btn-primary"
+                data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasAddData">
+            <i class="ti ti-plus me-1"></i> @Localization["AddNewCategory"]
+        </button>
+    </div>
+</div>
