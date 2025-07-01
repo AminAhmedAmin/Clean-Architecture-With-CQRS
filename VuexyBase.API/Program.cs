@@ -45,6 +45,8 @@ namespace VuexyBase.API
 
             builder.Services.AddSignalR();
 
+            builder.Services.AddMemoryCache();
+
             var app = builder.Build();
 
             // ^^MVC^^
