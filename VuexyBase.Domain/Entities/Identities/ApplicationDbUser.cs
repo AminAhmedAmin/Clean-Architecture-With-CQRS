@@ -5,6 +5,7 @@ using VuexyBase.Domain.Entities.Favorites;
 using VuexyBase.Domain.Entities.General;
 using VuexyBase.Domain.Entities.Notifications;
 using VuexyBase.Domain.Entities.Rates;
+using VuexyBase.Domain.Entities.UserRoles;
 using VuexyBase.Domain.Enums.Identities;
 using VuexyBase.Domain.Enums.Languages;
 
@@ -56,9 +57,12 @@ namespace VuexyBase.Domain.Entities.Identities
 
         public DateTime CreationDate { get; set; } = DateTime.UtcNow;
 
+        [ForeignKey(nameof(Role))]
+        public string RoleId { get; set; }
+
 
         #region Navigation Properties
-
+        public Role Role { get; set; }
         public virtual ICollection<DeviceToken> DeviceTokens { get; set; }
 
         public virtual ICollection<UserNotification> UserNotifications { get; set; }

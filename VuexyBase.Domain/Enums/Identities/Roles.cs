@@ -7,5 +7,6 @@
         Admin = 2,
         MobileUser = 3,
         WebUser = 4,
+        Manager=5,
     }
 }

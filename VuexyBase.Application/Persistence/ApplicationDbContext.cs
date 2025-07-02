@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using VuexyBase.Domain.Entities.Chats;
 using VuexyBase.Domain.Entities.Countries;
@@ -10,6 +11,7 @@ using VuexyBase.Domain.Entities.Notifications;
 using VuexyBase.Domain.Entities.Orders;
 using VuexyBase.Domain.Entities.Payments;
 using VuexyBase.Domain.Entities.Rates;
+using VuexyBase.Domain.Entities.UserRoles;
 using VuexyBase.Domain.Enums.Orders;
 
 namespace VuexyBase.Application.Persistence
@@ -63,6 +65,9 @@ namespace VuexyBase.Application.Persistence
 
         // IntroScreens
         public DbSet<IntroScreen> IntroScreens { get; set; }
+
+        public DbSet<Permission> Permissions { get; set; }
+        public DbSet<RolePermission> RolePermissions { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -79,6 +84,15 @@ namespace VuexyBase.Application.Persistence
             //Seeds
 
             //Fluent API
+            // Remove default many-to-many between User and Role
+            builder.Entity<IdentityUserRole<string>>().HasNoKey();
+
+            // Optional: enforce 1:1 Role per User (nullable = false)
+            builder.Entity<ApplicationDbUser>()
+                   .HasOne(u => u.Role)
+                   .WithMany(r => r.Users)
+                   .HasForeignKey(u => u.RoleId)
+                   .IsRequired();
         }
     }
 }

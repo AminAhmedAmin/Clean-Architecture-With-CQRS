@@ -5,6 +5,7 @@
         Unknown = 0,
         Client = 1,
         Provider = 2,
-        Admin = 3
+        Admin = 3, 
+        Manager = 4
     }
 }

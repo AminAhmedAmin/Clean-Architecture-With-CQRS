@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using VuexyBase.Domain.Entities.General;
 using VuexyBase.Domain.Entities.Identities;
+using VuexyBase.Domain.Entities.UserRoles;
 using VuexyBase.Domain.Enums.Identities;
 using VuexyBase.Domain.Enums.Languages;
 
@@ -43,6 +44,23 @@ namespace VuexyBase.Application.Persistence.Seeds
                 Address = "Matruh, Egypt",
                 SenderName = "VuexyBase"
             };
+        }
+        
+        // Method to seed permissions
+        public static List<Permission> Seedingpermissions()
+        {
+            var permissions = new List<Permission>
+    {
+        new Permission { Id = 1, Category = "User Management", Action = "Read" },
+        new Permission { Id = 2, Category = "User Management", Action = "Write" },
+        new Permission { Id = 3, Category = "User Management", Action = "Create" },
+
+        new Permission { Id = 4, Category = "Content Management", Action = "Read" },
+        new Permission { Id = 5, Category = "Content Management", Action = "Write" },
+        new Permission { Id = 6, Category = "Content Management", Action = "Create" },
+
+         };
+            return permissions;
         }
 
         // Method to seed users
@@ -103,7 +121,7 @@ namespace VuexyBase.Application.Persistence.Seeds
                     IsCodeVerified = true,
                     IsBlocked = false,
                     Wallet = 100.00m,
-                    UserType = UserType.Admin,
+                    UserType = UserType.Manager,
                     Language = Language.Ar,
                     CreationDate = DateTime.UtcNow
                 }
