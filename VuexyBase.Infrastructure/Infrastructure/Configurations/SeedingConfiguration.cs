@@ -4,6 +4,7 @@ using Microsoft.Extensions.Hosting;
 using VuexyBase.Application.Persistence;
 using VuexyBase.Application.Persistence.Seeds;
 using VuexyBase.Domain.Entities.Identities;
+using VuexyBase.Domain.Entities.UserRoles;
 
 namespace VuexyBase.Infrastructure.Infrastructure.Configurations
 {
@@ -26,7 +27,7 @@ namespace VuexyBase.Infrastructure.Infrastructure.Configurations
                     var seeder = new DataSeeder(
                         serviceProvider.GetRequiredService<ApplicationDbContext>(),
                         serviceProvider.GetRequiredService<UserManager<ApplicationDbUser>>(),
-                        serviceProvider.GetRequiredService<RoleManager<IdentityRole>>()
+                        serviceProvider.GetRequiredService<RoleManager<Role>>()
                     );
 
                     await seeder.SeedAsync();

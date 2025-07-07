@@ -108,13 +108,18 @@ namespace VuexyBase.Application.Persistence.Seeds
                 {
                     await _userManager.CreateAsync(user, "123456");
 
-                    // Assign the appropriate role (case-insensitive)
-                    //var roleName = user.Role ?? Roles.Admin.ToString(); // fallback if Role is null
-                    //if (Enum.TryParse<Roles>(roleName, true, out var role))
-                    //{
-                    //    await _userManager.AddToRoleAsync(user, role.ToString());
-                    //}
+                    if(user.UserType== UserType.Admin)
+                    {
+                        
+                            await _userManager.AddToRoleAsync(user, Roles.Admin.ToString());
+
+                    }
+                    else if(user.UserType== UserType.Manager)
+                    {
+                        await _userManager.AddToRoleAsync(user, Roles.Manager.ToString());
+                    }
                 }
+                 
             }
         }
 

@@ -83,6 +83,7 @@ namespace VuexyBase.Infrastructure.Configurations
             });
         }
 
+
         public static void AddSecretKeys(this IServiceCollection services, IConfiguration Configuration)
         {
             CryptographyExtension.Key = Configuration["Encryption:Key"]!;
@@ -225,6 +226,8 @@ namespace VuexyBase.Infrastructure.Configurations
             services.AddJWTServices(configuration);
 
             services.AddFireBase(configuration);
+
+
         }
         #endregion
 
