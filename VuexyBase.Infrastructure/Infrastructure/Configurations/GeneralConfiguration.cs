@@ -38,6 +38,8 @@ using VuexyBase.Infrastructure.Infrastructure.Services.IO;
 using VuexyBase.Infrastructure.Infrastructure.Services.SMS.FourJawaly;
 using VuexyBase.Infrastructure.Services.Notifications.Firebase;
 
+
+
 namespace VuexyBase.Infrastructure.Configurations
 {
     public static class GeneralConfiguration
@@ -179,7 +181,8 @@ namespace VuexyBase.Infrastructure.Configurations
             //});
         }
         #endregion
-
+        
+      
         #region Fluent Validation
         public static void AddFluentValidation(this IServiceCollection services)
         {
@@ -209,7 +212,19 @@ namespace VuexyBase.Infrastructure.Configurations
 
         #endregion
 
+        #region AddRedis
+        public static void AddRedis(this IServiceCollection services, IConfiguration configuration)
+        {
+            var redisConnectionString = configuration.GetSection("Redis:ConnectionString").Value;
 
+            services.AddStackExchangeRedisCache(options =>
+            {
+                options.Configuration = redisConnectionString;
+                options.InstanceName = "CleanANDCQRS"; // Used as key prefix
+            });
+
+        }
+        #endregion
         #region API Configuration
         public static void AddAPIConfiguration(this IServiceCollection services, IConfiguration configuration)
         {
@@ -227,7 +242,7 @@ namespace VuexyBase.Infrastructure.Configurations
 
             services.AddFireBase(configuration);
 
-
+            services.AddRedis(configuration);
         }
         #endregion
 

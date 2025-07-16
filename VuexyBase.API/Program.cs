@@ -47,6 +47,9 @@ namespace VuexyBase.API
 
             builder.Services.AddMemoryCache();
 
+            var redisConnectionString = builder.Configuration.GetSection("Redis:ConnectionString").Value;
+
+
             var app = builder.Build();
 
             // ^^MVC^^
